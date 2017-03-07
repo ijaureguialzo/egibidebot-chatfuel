@@ -64,7 +64,28 @@ app.get("/nota/:dni", function (req, res) {
 
     var respuesta = {};
 
-    if( process.env[dni] > 0 ) {
+    var nota = process.env[dni.toUpperCase()];
+
+    if( nota > 0 ) {
+
+        var imagen = "2";
+
+        switch (nota) {
+            case 5:
+            case 6:
+                imagen = "3";
+                break;
+            case 7:
+            case 8:
+                imagen = "4";
+            case 9:
+            case 10:
+                imagen = "5";
+                break;
+            case 11:
+                imagen = "1";
+                break;
+        }
 
         // Crear el objeto con la respuesta
         respuesta = {
@@ -76,9 +97,9 @@ app.get("/nota/:dni", function (req, res) {
                             "template_type": "generic",
                             "elements": [
                                 {
-                                    "title": "Excelente",
-                                    "image_url": "https://egibidebot.herokuapp.com/images/1.png",
-                                    "subtitle": "La nota del boletín es: " + process.env[dni],
+                                    "title": "",
+                                    "image_url": "https://egibidebot.herokuapp.com/images/"+imagen+".png",
+                                    "subtitle": "La nota del boletín es: " + nota,
                                 }
                             ]
                         }
