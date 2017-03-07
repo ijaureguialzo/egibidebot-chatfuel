@@ -62,26 +62,37 @@ app.get("/nota/:dni", function (req, res) {
         return res.status(400).send();
     }
 
-    // Crear el objeto con la respuesta
-    var respuesta = {
-        "messages": [
-            {
-                "attachment":{
-                    "type":"template",
-                    "payload":{
-                        "template_type":"generic",
-                        "elements":[
-                            {
-                                "title":"Excelente",
-                                "image_url":"https://egibidebot.herokuapp.com/images/1.png",
-                                "subtitle":"La nota del boletín es: "+process.env[dni],
-                            }
-                        ]
+    var respuesta = {};
+
+    if( process.env[dni] > 0 ) {
+
+        // Crear el objeto con la respuesta
+        respuesta = {
+            "messages": [
+                {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [
+                                {
+                                    "title": "Excelente",
+                                    "image_url": "https://egibidebot.herokuapp.com/images/1.png",
+                                    "subtitle": "La nota del boletín es: " + process.env[dni],
+                                }
+                            ]
+                        }
                     }
                 }
+            ]
+        };
+    } else {
+        respuesta = [
+            {
+                text: "No se ha encontrado ese DNI..."
             }
-        ]
-    };
+        ];
+    }
 
     // Devolver el objeto en formato JSON
     res.json(respuesta);
