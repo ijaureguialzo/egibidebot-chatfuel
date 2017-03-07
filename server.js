@@ -74,7 +74,7 @@ app.get("/nota/:dni", function (req, res) {
                             {
                                 "title":"Excelente",
                                 "image_url":"https://egibidebot.herokuapp.com/images/1.png",
-                                "subtitle":"La nota del boletín es: 6",
+                                "subtitle":"La nota del boletín es: "+process.env[dni],
                             }
                         ]
                     }
