@@ -64,7 +64,7 @@ app.get("/nota/:dni", function (req, res) {
 
     var respuesta = {};
 
-    var nota = process.env[dni.toUpperCase()];
+    var nota = parseInt(process.env[dni.toUpperCase()]);
 
     if( nota > 0 ) {
 
@@ -78,6 +78,7 @@ app.get("/nota/:dni", function (req, res) {
             case 7:
             case 8:
                 imagen = "4";
+            break;
             case 9:
             case 10:
                 imagen = "5";
