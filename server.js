@@ -97,7 +97,7 @@ app.get("/nota/:dni", function (req, res) {
                             "template_type": "generic",
                             "elements": [
                                 {
-                                    "title": "",
+                                    "title": "Ok",
                                     "image_url": "https://egibidebot.herokuapp.com/images/"+imagen+".png",
                                     "subtitle": "La nota del boletín es: " + nota,
                                 }
