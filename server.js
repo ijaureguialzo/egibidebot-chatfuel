@@ -69,7 +69,7 @@ app.get("/nota/:dni", function (req, res) {
                 "attachment": {
                     "type": "image",
                     "payload": {
-                        "url": "http://egibidebot.herokuapp.com/images/1.png"
+                        "url": "https://egibidebot.herokuapp.com/images/1.png"
                     }
                 }
             }
