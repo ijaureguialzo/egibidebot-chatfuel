@@ -62,19 +62,64 @@ app.get("/nota/:dni", function (req, res) {
         return res.status(400).send();
     }
 
-    // Crear el objeto con la respuesta
-    var respuesta = {
-        "messages": [
-            {
-                "attachment": {
-                    "type": "image",
-                    "payload": {
-                        "url": "https://egibidebot.herokuapp.com/images/1.png"
+    var respuesta = {};
+
+    var nota = parseInt(process.env[dni.toUpperCase()]);
+
+    if (nota > 0) {
+
+        var imagen = "2";
+        var mensaje = "El proyecto no cumple los requisitos mínimos";
+
+        switch (nota) {
+            case 5:
+            case 6:
+                imagen = "3";
+                mensaje = "El proyecto cumple los requisitos mínimos";
+                break;
+            case 7:
+            case 8:
+                imagen = "4";
+                mensaje = "Se ha añadido funcionalidad extra y el bot funciona correctamente";
+                break;
+            case 9:
+            case 10:
+                imagen = "5";
+                mensaje = "Funciona perfectamente y añade capacidades nuevas al bot";
+                break;
+            case 11:
+                imagen = "1";
+                mensaje = "No se ha entregado el proyecto en el plazo previsto";
+                break;
+        }
+
+        // Crear el objeto con la respuesta
+        respuesta = {
+            "messages": [
+                {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [
+                                {
+                                    "title": mensaje,
+                                    "image_url": "https://egibidebot.herokuapp.com/images/" + imagen + ".png",
+                                    "subtitle": "La nota del boletín es: " + nota,
+                                }
+                            ]
+                        }
                     }
                 }
-            }
-        ]
-    };
+            ]
+        };
+    } else {
+        respuesta = {
+            "messages": [
+                {"text": "No se ha encontrado ese DNI..."}
+            ]
+        };
+    }
 
     // Devolver el objeto en formato JSON
     res.json(respuesta);
