@@ -70,6 +70,7 @@ app.get("/nota/:dni", function (req, res) {
 
         var imagen = "2";
         var mensaje = "El proyecto no cumple los requisitos mínimos";
+        var subtitulo = "La nota del boletín es: " + nota;
 
         switch (nota) {
             case 5:
@@ -90,6 +91,7 @@ app.get("/nota/:dni", function (req, res) {
             case 11:
                 imagen = "1";
                 mensaje = "No se ha entregado el proyecto en el plazo previsto";
+                subtitulo = "La nota del boletín es: NP";
                 break;
         }
 
@@ -105,7 +107,7 @@ app.get("/nota/:dni", function (req, res) {
                                 {
                                     "title": mensaje,
                                     "image_url": "https://egibidebot.herokuapp.com/images/" + imagen + ".png",
-                                    "subtitle": "La nota del boletín es: " + nota,
+                                    "subtitle": subtitulo
                                 }
                             ]
                         }
