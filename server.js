@@ -14,18 +14,18 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 
 /*
-    GET /plazo/:fecha
+ GET /plazo/:fecha
 
-    Ruta que calcula el número de días que faltan para una fecha
+ Ruta que calcula el número de días que faltan para una fecha
 
-    Si el servidor se está ejecutando localmente:
+ Si el servidor se está ejecutando localmente:
 
-    http://localhost:3000/plazo/2017-01-31T23:59:59.000Z
+ http://localhost:3000/plazo/2017-01-31T23:59:59.000Z
 
-    Devuelve un objeto JSON con el formato:
+ Devuelve un objeto JSON con el formato:
 
-    [{"text":"Faltan 59 días..."}]
-*/
+ [{"text":"Faltan 59 días..."}]
+ */
 app.get("/plazo/:fecha", function (req, res) {
 
     // Obtener la fecha que llega en la URL
@@ -51,6 +51,35 @@ app.get("/plazo/:fecha", function (req, res) {
     // Devolver el objeto en formato JSON
     res.json(respuesta);
 });
+
+app.get("/nota/:dni", function (req, res) {
+
+    // Obtener el DNI
+    var dni = req.params.dni;
+
+    // Algo no ha ido bien
+    if (!dni) {
+        return res.status(400).send();
+    }
+
+    // Crear el objeto con la respuesta
+    var respuesta = {
+        "messages": [
+            {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": "http://egibidebot.herokuapp.com/images/1.png"
+                    }
+                }
+            }
+        ]
+    };
+
+    // Devolver el objeto en formato JSON
+    res.json(respuesta);
+});
+
 
 // Arrancar el servidor y dejarlo a la espera
 app.listen(PORT, function () {
