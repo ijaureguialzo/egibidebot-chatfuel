@@ -66,10 +66,17 @@ app.get("/nota/:dni", function (req, res) {
     var respuesta = {
         "messages": [
             {
-                "attachment": {
-                    "type": "image",
-                    "payload": {
-                        "url": "https://egibidebot.herokuapp.com/images/1.png"
+                "attachment":{
+                    "type":"template",
+                    "payload":{
+                        "template_type":"generic",
+                        "elements":[
+                            {
+                                "title":"Excelente",
+                                "image_url":"https://egibidebot.herokuapp.com/images/1.png",
+                                "subtitle":"La nota del boletín es: 6",
+                            }
+                        ]
                     }
                 }
             }
